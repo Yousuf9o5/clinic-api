@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const cors = require('cors')
 const patientsRouter = require('./src/routes/v1/patients')
 const historyRouter = require('./src/routes/v1/history')
 const AuthRouter = require('./src/routes/v1/auth')
@@ -39,7 +40,7 @@ const PORT = 5000;
 // middlwares
 app.use(express.json())
 app.use(express.static('public'))
-
+app.use(cors())
 // for testing
 app.get('/', (req, res)=>{
     res.send('<h1>This is Clinic Restful API</h1>')

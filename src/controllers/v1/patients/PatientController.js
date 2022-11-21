@@ -66,7 +66,7 @@ const deletePatient = async (req, res)=>{
     try {
         const p = await Patient.findByIdAndDelete(id);
         return res.status(200).json(success(200,p,"Ok"))
-    } catch (error) {
+    } catch (e) {
         return res.status(500).json(error(500,"Server Side Error"))
     }
 
