@@ -63,10 +63,9 @@ const signup = (req, res)=>{
 
 const signin = async (req, res)=>{
     let errors = validationResult(req).array();
-    if(errors)
+    if(errors && errors.length>0)
     {
         return res.status(400).json(error(400,errors))
-
     }
     try {
         let user = await User.findOne({
@@ -92,7 +91,7 @@ const signin = async (req, res)=>{
         },JWT_SECRET_KEY,{
             expiresIn:3600// 1 hour
         })
-        return res.status(200).json(error(200,{
+        return res.status(200).json(success(200,{
             id:user.id,
             username:user.username,
             roles:RolesNames,

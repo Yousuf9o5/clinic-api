@@ -9,7 +9,7 @@ const getAllPatients = async (req, res)=>{
     const full_name = req.query.full_name
     const limit = req.query.limit?req.query.limit:10
     const offset = req.query.offset?req.query.offset:0
-
+    
     const filter = {};
     if(gender)
     {
@@ -37,7 +37,9 @@ const getAllPatients = async (req, res)=>{
         $project:{
             full_name:1,
             phone:1,
-            history:1
+            history:1,
+            gender:1,
+            code:1
         }
        }
     ])
