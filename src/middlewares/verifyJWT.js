@@ -6,7 +6,7 @@ const JWT_SECRET_KEY = process.env.JWT_SECRET_KEY
 const verifyToken = async (req, res, next)=>{
     let token = req.headers['authorization']
 
-    console.log(token)
+    console.log('token in verifyJWT mw is: ',token)
     if(!token)
         return res.status(403).json(error(403,"Unauhtorized"))
     

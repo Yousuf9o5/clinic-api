@@ -6,6 +6,10 @@ const historyRouter = require('./src/routes/v1/history')
 const AuthRouter = require('./src/routes/v1/auth')
 const {verifyToken} = require('./src/middlewares/verifyJWT')
 const {isAdmin} = require('./src/middlewares/IsAdmin')
+const bodyParser = require('body-parser')
+var multer = require('multer');
+var upload = multer();
+
 
 require('dotenv').config()
 
@@ -41,6 +45,13 @@ const PORT = 5000;
 app.use(express.json())
 app.use(express.static('public'))
 app.use(cors())
+// for parsing application/json
+app.use(bodyParser.json()); 
+
+app.use(upload.array());
+// for parsing application/xwww-
+app.use(bodyParser.urlencoded({ extended: true })); 
+//form-urlencoded
 // for testing
 app.get('/', (req, res)=>{
     res.send('<h1>This is Clinic Restful API</h1>')

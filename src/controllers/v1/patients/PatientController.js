@@ -1,5 +1,6 @@
 const Patient = require('../../../models/Patient')
 const {History} = require('../../../models/History')
+const { validationResult } = require('express-validator');
 
 const {success, error} = require('../../../utils/responser')
 
@@ -39,7 +40,8 @@ const getAllPatients = async (req, res)=>{
             phone:1,
             history:1,
             gender:1,
-            code:1
+            code:1,
+            birth_date:1
         }
        }
     ])
@@ -101,6 +103,10 @@ const getHistoryOfPatient = async (req, res)=>{
     // TO-DO
     const p = await Patient.findById(id)
     .populate('history')
+    if(!p)
+        return res.status(404).json(error(404,{},"No Data"))
+        
+    console.log('patient is :',p)
     let history = p.history;
     return res.status(200).json(success(200,history,"Ok"))
 }
@@ -166,8 +172,14 @@ const newHistory = async (req, res)=>{
     if(!p)
         return res.status(404).json(error(404,{},"No Data"))
 
-    
-    let h = new History(req.body)
+    console.log('body is ',req.body)
+    let historyData = {
+        date:req.body.date,
+        report:req.body.report,
+        prescription:JSON.parse(req.body.prescription)
+    }
+    console.log('pased object: ',historyData)
+    let h = new History(historyData)
     await h.save()
     if(!p.history)
         p.history = []
