@@ -69,3 +69,4 @@ app.use('/api/v1/history',[
 app.use('/api/v1/auth',AuthRouter);
 
 app.listen(APP_PORT)
+console.log('App Running')
