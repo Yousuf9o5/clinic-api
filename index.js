@@ -60,4 +60,9 @@ app.use("/api/v1/patients", patientsRouter);
 app.use("/api/v1/history", historyRouter);
 app.use("/api/v1/auth", AuthRouter);
 
+<<<<<<< HEAD
 app.listen(APP_PORT);
+=======
+app.listen(APP_PORT)
+console.log('App Running')
+>>>>>>> 6dd0dcd2ec295248f531f2869776f21fdb24b6ca
