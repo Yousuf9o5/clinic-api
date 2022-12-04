@@ -36,8 +36,6 @@ db.on("error", (e) => {
 db.once("open", () => {
   console.log("Connected to DB successfully");
 });
-
-const PORT = 5000;
 // middlwares
 app.use(express.json());
 app.use(express.static("public"));
@@ -59,4 +57,5 @@ app.get("/", (req, res) => {
 app.use("/api/v1/patients", patientsRouter);
 app.use("/api/v1/history", historyRouter);
 app.use("/api/v1/auth", AuthRouter);
+
 app.listen(APP_PORT);
